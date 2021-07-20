@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h3>Create new user</h3>
+    <h3>create new user</h3>
     <form action="{{ route('users.store') }}" method="POST">
         @csrf
         <div class="form-group">
