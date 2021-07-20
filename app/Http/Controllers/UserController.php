@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,8 @@ class UserController extends Controller
     {
         return view('users.index', [
             'activeUsers' => User::active()->get(),
-            'inactiveUsers' => User::inactive()->get()
+            'inactiveUsers' => User::inactive()->get(),
+            'companies' => Company::all(),
         ]);
     }
 
@@ -27,18 +30,29 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create', [
+            'companies' => Company::all(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        User::create([
+            'company_id' => $request->company_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'active' => $request->active,
+            'email_verified_at' => $request->email_verified_at,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return redirect()->route('users.index');
     }
 
     /**

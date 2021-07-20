@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use \Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -18,6 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'company_id',
         'name',
         'email',
         'active',
@@ -63,5 +65,15 @@ class User extends Authenticatable
     public function scopeInactive($query): Builder
     {
         return $query->where('active', 0);
+    }
+
+    /**
+     * Get the company that the user belongs to.
+     * 
+     * @return BelongsTo
+     */
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 }
