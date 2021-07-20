@@ -1,5 +1,3 @@
-# Queues:
+# Artisan Commands:
 
-- Database Driver
-> `php artisan queue:table`
-> `php artisan queue:work`
+`php artisan make:command AddCompanyCommand`
