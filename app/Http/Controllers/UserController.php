@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewUserHasRegisteredEvent;
 use App\Http\Requests\UserRequest;
 use App\Models\Company;
 use App\Models\User;
@@ -41,14 +42,15 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        User::create([
+        $user = User::create([
             'company_id' => $request->company_id,
             'name' => $request->name,
             'email' => $request->email,
             'active' => $request->active,
-            'email_verified_at' => $request->email_verified_at,
             'password' => bcrypt($request->password),
         ]);
+
+        event(new NewUserHasRegisteredEvent($user));
 
         return redirect()->route('users.index');
     }
