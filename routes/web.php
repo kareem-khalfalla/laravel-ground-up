@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/test', function () {
+
+    $user = User::factory()->create();
+
+    $user->posts()->create([
+        'title' => 'Cool post title',
+        'content' => 'Cool post content',
+        'user_id' => $user->id
+
+    ]);
+
+    // updated this post
+    $user->posts->first()->update([
+        'title' => 'Updated title...',
+        'content' => 'Updated content...',
+    ]);
+    return $user->posts;
 });
