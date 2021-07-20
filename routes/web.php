@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Phone;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/test', function () {
+
+    $user = User::factory()->create();
+
+    $user->phone()->create([
+        'phone' => '343-456-1234'
+    ]);
 });
