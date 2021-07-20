@@ -8,7 +8,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('contact', [ContactFormController::class, 'create'])->name('contact.create');
-Route::post('contact', [ContactFormController::class, 'store'])->name('contact.store');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
+
 
 Route::resource('users', UserController::class);
+
+Route::get('contact', [ContactFormController::class, 'create'])->name('contact.create');
+Route::post('contact', [ContactFormController::class, 'store'])->name('contact.store');

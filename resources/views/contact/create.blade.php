@@ -1,45 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-guest-layout>
+    <x-auth-card>
+        <x-slot name="logo">
+            <a href="/">
+                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            </a>
+        </x-slot>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>contact</title>
-</head>
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-<body>
-    <h3>keep in touch</h3>
-    <form action="{{ route('contact.store') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <input type="text" name="name" placeholder="Full name" value="{{ old('name') }}">
-            @error('name')
-                <p>
-                    {{ $message }}
-                </p>
-            @enderror
-        </div>
-        <div class="form-group">
-            <input type="email" name="email" placeholder="E-mail" value="{{ old('email') }}">
-            @error('email')
-                <p>
-                    {{ $message }}
-                </p>
-            @enderror
-        </div>
-        <div class="form-group">
-            <textarea name="message" cols="15" rows="5" placeholder="Type your message...">{{ old('message') }}</textarea>
-            @error('email')
-                <p>
-                    {{ $message }}
-                </p>
-            @enderror
-        </div>
-        <div class="form-group">
-            <button type="submit">Save</button>
-        </div>
-    </form>
-</body>
+        <form method="POST" action="{{ route('contact.store') }}">
+            @csrf
 
-</html>
+            <!-- Name -->
+            <div>
+                <x-label for="name" :value="__('Name')" />
+
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            </div>
+
+            <!-- Email Address -->
+            <div class="mt-4">
+                <x-label for="email" :value="__('Email')" />
+
+                <x-input id="emeail" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+
+
+            <div class="mt-4">
+                <x-label for="message" :value="__('Message')" />
+                
+                <x-textarea class="w-full" name="message" cols="30" rows="6" :value="old('message')" required />
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+
+
+                <x-button class="ml-4">
+                    {{ __('Send') }}
+                </x-button>
+            </div>
+        </form>
+    </x-auth-card>
+</x-guest-layout>
