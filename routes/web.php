@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/test', function () {
+    // $user = User::factory()->create();
+    // $user = User::find(13);
+
+    // $roles = Role::all();
+
+    // $user->roles()->sync($roles);
+    // $user->roles()->sync([
+    //     1, 3, 5
+    // ]);
+    // $user->roles()->detach($roles);
+
+    $role = Role::find(4);
+
+    $role->users()->sync([1,5]);
 });
