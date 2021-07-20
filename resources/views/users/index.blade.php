@@ -10,13 +10,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="flex justify-end">
-                        <a href="{{ route('users.create') }}">
-                            <x-button>
-                                {{ __('Create') }}
-                            </x-button>
-                        </a>
-                    </div>
+                    @can('create', \App\Models\User::class)
+                        <div class="flex justify-end">
+                            <a href="{{ route('users.create') }}">
+                                <x-button>
+                                    {{ __('Create') }}
+                                </x-button>
+                            </a>
+                        </div>
+                    @endcan
                     <div class="text-center w-3/4 mx-auto">
                         <table class="table-auto">
                             <thead>
@@ -36,9 +38,15 @@
                                             {{ $user->id }}
                                         </td>
                                         <td class="text-blue-500">
-                                            <a href="{{ route('users.show', $user->id) }}">
-                                                {{ $user->name }}
-                                            </a>
+                                            @can('view', $user)
+                                                <a href="{{ route('users.show', $user->id) }}">
+                                                    {{ $user->name }}
+                                                </a>
+                                            @endcan
+
+                                            @cannot('view', $user)
+                                                <span>{{ $user->name }}</span>
+                                            @endcannot
                                         </td>
                                         <td>
                                             {{ $user->company->name }}

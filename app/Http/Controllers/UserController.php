@@ -42,6 +42,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        $this->authorize('create', User::class);
+
         $user = User::create([
             'company_id' => $request->company_id,
             'name' => $request->name,
@@ -96,12 +98,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $this->authorize('delete', $user);
+        $user->delete();
+        return redirect()->route('users.index');
     }
 
     private function storeImage(User $user, UserRequest $request)
