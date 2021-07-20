@@ -76,4 +76,18 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Company::class);
     }
+    
+    /**
+     * Get the users status.
+     *
+     * @param  bool $attribute
+     * @return string
+     */
+    public function getActiveAttribute(bool $attribute): string
+    {
+        return [
+            0 => 'inactive',
+            1 => 'active',
+        ][$attribute];
+    }
 }

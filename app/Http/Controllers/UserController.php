@@ -17,9 +17,7 @@ class UserController extends Controller
     public function index()
     {
         return view('users.index', [
-            'activeUsers' => User::active()->get(),
-            'inactiveUsers' => User::inactive()->get(),
-            'companies' => Company::all(),
+            'users' => User::all()
         ]);
     }
 
