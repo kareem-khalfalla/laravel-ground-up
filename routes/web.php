@@ -15,7 +15,7 @@ Route::get('/dashboard', function () {
 require __DIR__ . '/auth.php';
 
 
-Route::resource('users', UserController::class);
+Route::resource('users', UserController::class)->middleware('auth');
 
 Route::get('contact', [ContactFormController::class, 'create'])->name('contact.create');
 Route::post('contact', [ContactFormController::class, 'store'])->name('contact.store');
