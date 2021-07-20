@@ -50,6 +50,8 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        $this->storeImage($user, $request);
+
         event(new NewUserHasRegisteredEvent($user));
 
         return redirect()->route('users.index');
@@ -58,12 +60,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -98,5 +102,14 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function storeImage(User $user, UserRequest $request)
+    {
+        if ($request->hasFile('image')) {
+            $user->update([
+                'image' => $request->image->store('uploads', 'public')
+            ]);
+        }
     }
 }

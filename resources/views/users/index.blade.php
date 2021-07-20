@@ -35,8 +35,10 @@
                                         <td class="p-2">
                                             {{ $user->id }}
                                         </td>
-                                        <td>
-                                            {{ $user->name }}
+                                        <td class="text-blue-500">
+                                            <a href="{{ route('users.show', $user->id) }}">
+                                                {{ $user->name }}
+                                            </a>
                                         </td>
                                         <td>
                                             {{ $user->company->name }}

@@ -1,3 +1,3 @@
-# Artisan Commands:
+# Image upload:
 
-`php artisan make:command AddCompanyCommand`
+`php artisan storage:link`

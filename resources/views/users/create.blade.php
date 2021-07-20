@@ -9,7 +9,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('users.store') }}">
+        <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
             @csrf
 
             <!-- Name -->
@@ -47,6 +47,11 @@
                     @endforeach
                 </select>
 
+            </div>
+
+            <div class="mt-2 flex flex-col">
+                <x-label for="image" :value="__('Image')" />
+                <input type="file" name="image" class="py-2">
             </div>
 
 
