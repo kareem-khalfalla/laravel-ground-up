@@ -17,5 +17,5 @@ require __DIR__ . '/auth.php';
 
 Route::resource('users', UserController::class)->middleware('auth');
 
-Route::get('contact', [ContactFormController::class, 'create'])->name('contact.create');
+Route::get('contact', [ContactFormController::class, 'create'])->middleware('test')->name('contact.create');
 Route::post('contact', [ContactFormController::class, 'store'])->name('contact.store');
