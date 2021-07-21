@@ -16,19 +16,15 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         Role::create([
-            'name' => 'delete_user',
+            'name' => 'admin_user',
         ]);
+
         Role::create([
-            'name' => 'add_user',
+            'name' => 'moderator_user',
         ]);
+
         Role::create([
-            'name' => 'modify_user',
-        ]);
-        Role::create([
-            'name' => 'edit_comments',
-        ]);
-        Role::create([
-            'name' => 'delete_comments',
+            'name' => 'normal_user',
         ]);
     }
 }

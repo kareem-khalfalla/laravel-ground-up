@@ -20,8 +20,19 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    // $user = User::factory()->create();
-    // $user = User::find(13);
+    // User::factory()->create();
+    $user = User::first();
+
+    $user->roles()->sync([
+        1 => [
+            'name' => 'Kareem'
+        ],
+        2 => [
+            'name' => 'Kareem'
+        ]
+    ]);
+
+    dd($user->roles[0]->pivot->name);
 
     // $roles = Role::all();
 
@@ -31,7 +42,7 @@ Route::get('/test', function () {
     // ]);
     // $user->roles()->detach($roles);
 
-    $role = Role::find(4);
+    // $role = Role::find(4);
 
-    $role->users()->sync([1,5]);
+    // $role->users()->sync([1,5]);
 });
