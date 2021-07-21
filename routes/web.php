@@ -52,3 +52,20 @@ Route::get('/videos/comments', function () {
         'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, fugit again?'
     ]);
 });
+
+Route::get('/posts/tags', function () {
+    /** @var \App\Models\Post $post */
+    $post = Post::first();
+    $post->tags()->create([
+        'name' => 'laravel'
+    ]);
+});
+
+Route::get('/videos/tags', function () {
+    /** @var \App\Models\Video $video */
+    $video = Video::first();
+    // $video->tags()->create([
+    //     'name' => 'php'
+    // ]);
+    $video->tags()->attach(2);
+});
