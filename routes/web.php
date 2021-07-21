@@ -1,5 +1,7 @@
 <?php
 
+use App\Postcard;
+use App\PostcardSendingService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('postcards', function () {
+    $postcardService = new PostcardSendingService('eg', 4, 6);
+    $postcardService->hello('Hello from Kareem EG!', 'kareem.khalfalla.dev@gmail.com');
+});
+
+Route::get('facades', function () {
+    Postcard::hello('Hello from FACADES!', 'kareem.khalfalla.dev@gmail.com');
 });
