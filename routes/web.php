@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Video;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', function () {
+Route::get('/posts/images', function () {
     /** @var \App\Models\Post $post */
     $post = Post::first();
     $post->image()->create([
@@ -27,7 +29,7 @@ Route::get('/posts', function () {
     ]);
 });
 
-Route::get('/users', function () {
+Route::get('/users/images', function () {
     /** @var \App\Models\User $user */
     $user = User::first();
     $user->image()->create([
@@ -35,3 +37,18 @@ Route::get('/users', function () {
     ]);
 });
 
+Route::get('/posts/comments', function () {
+    /** @var \App\Models\Post $post */
+    $post = Post::first();
+    $post->comments()->create([
+        'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, fugit again?'
+    ]);
+});
+
+Route::get('/videos/comments', function () {
+    /** @var \App\Models\Video $video */
+    $video = Video::first();
+    $video->comments()->create([
+        'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, fugit again?'
+    ]);
+});
