@@ -24,7 +24,7 @@ class {{ class }} extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        ${{ modelVariable }}->store($request->all());
+        {{ model }}::create($request->all());
         return redirect()->route('{{ modelVariable }}s.index');
     }
 
