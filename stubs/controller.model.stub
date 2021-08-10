@@ -38,7 +38,7 @@ class {{ class }} extends Controller
     public function edit({{ model }} ${{ modelVariable }}): View
     {
         return view('{{ modelVariable }}s.edit', [
-            '{{ modelVariable }}s' => ${{ modelVariable }},
+            '{{ modelVariable }}' => ${{ modelVariable }},
         ]);
     }
 
